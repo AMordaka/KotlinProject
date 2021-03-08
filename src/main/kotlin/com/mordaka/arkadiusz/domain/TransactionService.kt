@@ -23,7 +23,9 @@ internal class TransactionService(
         }
         return ids!!.split(",")
             .map { it.trim().toLong() }
-            .map { transactionDao.getTransactionsDaoByCustomerId(it).toAggregateTransactionInfoDto() }
+            .map { transactionDao.getTransactionsDaoByCustomerId(it) }
+            .filter { it.isNotEmpty() }
+            .map { it.toAggregateTransactionInfoDto() }
     }
 
     private fun paramIsEmptyOrAll(customerId: String?): Boolean {
