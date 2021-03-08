@@ -7,7 +7,7 @@ password: pass
 
 API:
 GET METHOD:
-``http://localhost:8080/api```
+```http://localhost:8080/api```
 ```http://localhost:8080/api?customer_id=params```
 
 Command to build docker image:
