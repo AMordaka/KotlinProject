@@ -27,12 +27,9 @@ internal class Controller(
     }
 
     private fun paramIsEmptyOrAll(customerId: String?): Boolean {
-        if (!customerId.isNullOrBlank()) {
-            if (customerId == "ALL") {
-                return true
-            }
-            return false
+        if (customerId.isNullOrBlank()) {
+            return true
         }
-        return true
+        return customerId == "ALL"
     }
 }
