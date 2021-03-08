@@ -78,7 +78,9 @@ internal class TaskControllerIntegrationTest {
                 Arguments.of("", 5),
                 Arguments.of("?customer_id=ALL", 5),
                 Arguments.of("?customer_id=5", 1),
-                Arguments.of("?customer_id=1,3,5", 3)
+                Arguments.of("?customer_id=1,3,5", 3),
+                Arguments.of("?customer_id=633", 0),
+                Arguments.of("?customer_id=1,3,644", 2)
             )
         }
     }
