@@ -13,7 +13,7 @@ internal class Controller(
     private val IService: IService
 ) {
     @GetMapping("/api")
-    fun generatePassword(@RequestParam(required = false) customer_id: String?): ResponseEntity<List<AggregateTransactionInfoDto>> {
+    fun getAggregatedTransactions(@RequestParam(required = false) customer_id: String?): ResponseEntity<List<AggregateTransactionInfoDto>> {
         if (paramIsEmptyOrAll(customer_id)) {
             return ResponseEntity.ok(IService.getCustomerTransactions())
         }
@@ -27,12 +27,9 @@ internal class Controller(
     }
 
     private fun paramIsEmptyOrAll(customerId: String?): Boolean {
-        if (!customerId.isNullOrBlank()) {
-            if (customerId == "ALL") {
-                return true
-            }
-            return false
+        if (customerId.isNullOrBlank()) {
+            return true
         }
-        return true
+        return customerId == "ALL"
     }
 }
