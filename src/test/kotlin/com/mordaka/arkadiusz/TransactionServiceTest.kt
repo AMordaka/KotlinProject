@@ -4,6 +4,7 @@ import com.mordaka.arkadiusz.domain.FeeWagesCsv
 import com.mordaka.arkadiusz.domain.TransactionCsv
 import com.mordaka.arkadiusz.domain.TransactionService
 import com.mordaka.arkadiusz.domain.port.IFeeDao
+import com.mordaka.arkadiusz.domain.port.IFeeInfoDao
 import com.mordaka.arkadiusz.domain.port.ITransactionDao
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
@@ -18,8 +19,9 @@ internal class TransactionServiceTest {
 
     private val transactionDao = Mockito.mock(ITransactionDao::class.java)
     private val feeDao = Mockito.mock(IFeeDao::class.java)
+    private val feeInfoDao = Mockito.mock(IFeeInfoDao::class.java)
 
-    private val instance = TransactionService(transactionDao, feeDao)
+    private val instance = TransactionService(transactionDao, feeDao, feeInfoDao)
 
     @Test
     fun `transaction service should be initialized`() {

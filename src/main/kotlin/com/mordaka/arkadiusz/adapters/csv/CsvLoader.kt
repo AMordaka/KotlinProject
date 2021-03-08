@@ -51,7 +51,7 @@ internal class CsvLoader(
 
     private fun loadFeeWages() {
         readCsvFile<FeeWagesCsv>(ClassPathResource("/static/fee_wages.csv").file.absolutePath)
-            .parallelStream().forEach { run { feeWagesRepository.save(it) } }
+            .forEach { run { feeWagesRepository.save(it) } }
     }
 
     private inline fun <reified T> readCsvFile(fileName: String): List<T> {

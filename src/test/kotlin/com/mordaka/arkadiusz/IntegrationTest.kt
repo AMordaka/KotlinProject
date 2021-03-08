@@ -1,5 +1,6 @@
 package com.mordaka.arkadiusz
 
+import com.mordaka.arkadiusz.domain.port.IFeeInfoDao
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.TestInstance
@@ -9,6 +10,7 @@ import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import org.junit.jupiter.params.provider.ValueSource
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.test.context.junit.jupiter.SpringExtension
@@ -18,6 +20,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class TaskControllerIntegrationTest {
+
+    @MockBean
+    private lateinit var feeInfoDao: IFeeInfoDao
 
     private val restTemplate = TestRestTemplate()
 

@@ -15,6 +15,6 @@ internal class InMemoryFeeWagesRepository {
     }
 
     fun getFees(): List<FeeWagesCsv> {
-        return map.values.toList()
+        return map.values.toList().sortedBy { it.transaction_value_less_than }
     }
 }
