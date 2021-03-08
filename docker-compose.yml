@@ -1,0 +1,21 @@
+version: "3"
+services:
+  db-mongo:
+    container_name: db-mongo
+    image: mongo:4.4.4
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+  api-service:
+    image: com.mordaka.arkadiusz/kotlinproject:0.0.1-snapshot
+    container_name: api-service
+    ports:
+    - 8080:8080
+    depends_on:
+      - db-mongo
+
+
+
+
