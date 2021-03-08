@@ -32,11 +32,11 @@ internal class TransactionServiceTest {
     @Test
     fun `should return correct data`() {
         //given
-        Mockito.`when`(transactionDao.getCustomerTransactionsDao()).thenReturn(testTransactionData(0.0))
+        Mockito.`when`(transactionDao.getTransactionsDaoByCustomerId(1L)).thenReturn(testTransactionData(0.0))
         Mockito.`when`(feeDao.getFeePercentages()).thenReturn(feeWages)
 
         //when
-        val aggregatedData = instance.getCustomerTransactions()
+        val aggregatedData = instance.getCustomerTransactions("1")
 
         //then
         Assertions.assertEquals(1, aggregatedData.size)
@@ -55,7 +55,7 @@ internal class TransactionServiceTest {
         Mockito.`when`(feeDao.getFeePercentages()).thenReturn(feeWages)
 
         //when
-        val aggregatedData = instance.getCustomerTransactions()
+        val aggregatedData = instance.getCustomerTransactions("")
 
         //then
         Assertions.assertEquals(amount, aggregatedData[0].totalValueOfTransactions)

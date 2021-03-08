@@ -15,14 +15,22 @@ internal class TransactionService(
     private val feeInfoDao: IFeeInfoDao
 ) : IService {
 
-    override fun getCustomerTransactions(): List<AggregateTransactionInfoDto> {
-        return transactionDao.getCustomerTransactionsDao()
-            .groupBy { it.customer_id }
-            .map { (_, value) -> value.toAggregateTransactionInfoDto() }
+    override fun getCustomerTransactions(ids: String?): List<AggregateTransactionInfoDto> {
+        if (paramIsEmptyOrAll(ids)) {
+            return transactionDao.getCustomerTransactionsDao()
+                .groupBy { it.customer_id }
+                .map { (_, value) -> value.toAggregateTransactionInfoDto() }
+        }
+        return ids!!.split(",")
+            .map { it.trim().toLong() }
+            .map { transactionDao.getTransactionsDaoByCustomerId(it).toAggregateTransactionInfoDto() }
     }
 
-    override fun getTransactionsByCustomerId(id: Long): AggregateTransactionInfoDto {
-        return transactionDao.getTransactionsDaoByCustomerId(id).toAggregateTransactionInfoDto()
+    private fun paramIsEmptyOrAll(customerId: String?): Boolean {
+        if (customerId.isNullOrBlank()) {
+            return true
+        }
+        return customerId == "ALL"
     }
 
     private fun List<TransactionCsv>.toAggregateTransactionInfoDto(): AggregateTransactionInfoDto {
