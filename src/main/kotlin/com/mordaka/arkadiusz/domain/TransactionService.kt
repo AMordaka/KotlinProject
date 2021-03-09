@@ -6,7 +6,11 @@ import com.mordaka.arkadiusz.domain.port.IFeeInfoDao
 import com.mordaka.arkadiusz.domain.port.IService
 import com.mordaka.arkadiusz.domain.port.ITransactionDao
 import org.springframework.stereotype.Component
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
 import java.time.LocalDateTime
+import java.util.*
+
 
 @Component
 internal class TransactionService(
@@ -60,7 +64,9 @@ internal class TransactionService(
         } else this * (0.1 / 100)
     }
 
-    private fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
+    private fun Double.round(): Double =
+        DecimalFormat("#.##", DecimalFormatSymbols.getInstance(Locale.ENGLISH)).format(this).toDouble()
+
 }
 
 
